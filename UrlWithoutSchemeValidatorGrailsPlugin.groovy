@@ -5,6 +5,12 @@ class UrlWithoutSchemeValidatorGrailsPlugin {
     def grailsVersion = "2.0 > *"
     // resources that are excluded from plugin packaging
     def pluginExcludes = [
+        "grails-app/controllers/**",
+        "grails-app/domain/**",
+        "grails-app/services/**",
+        "grails-app/taglib/**",
+        "grails-app/utils/**",
+        "grails-app/views/**",
         "grails-app/views/error.gsp"
     ]
 
