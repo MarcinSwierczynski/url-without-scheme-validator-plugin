@@ -5,7 +5,7 @@ class DomainWithValidation {
 	String url
 
 	static constraints = {
-	    url urlWithoutScheme: true
+	    url nullable: true, urlWithoutScheme: true
 	}
 
 }

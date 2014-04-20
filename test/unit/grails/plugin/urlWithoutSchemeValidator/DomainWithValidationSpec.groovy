@@ -23,4 +23,12 @@ class DomainWithValidationSpec extends Specification {
 		domain.errors.getFieldError('url')
 	}
 
+	void "should consider null URL valid"() {
+		given:
+		DomainWithValidation domain = new DomainWithValidation(url: null)
+
+		expect:
+		domain.validate()
+	}
+
 }
