@@ -1,3 +1,6 @@
+import grails.plugin.urlWithoutSchemeValidator.constraints.UrlWithoutSchemeConstraint
+import org.codehaus.groovy.grails.validation.ConstrainedProperty
+
 // configuration for plugin testing - will not be included in the plugin zip
 
 log4j = {
@@ -20,3 +23,5 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+ConstrainedProperty.registerNewConstraint(UrlWithoutSchemeConstraint.CONSTRAINT_NAME, UrlWithoutSchemeConstraint.class)
