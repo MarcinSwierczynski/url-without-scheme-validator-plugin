@@ -1,76 +1,79 @@
-class UrlWithoutSchemeValidatorGrailsPlugin {
-    // the plugin version
-    def version = "0.1"
-    // the version or versions of Grails the plugin is designed for
-    def grailsVersion = "2.0 > *"
-    // resources that are excluded from plugin packaging
-    def pluginExcludes = [
-        "grails-app/controllers/**",
-        "grails-app/domain/**",
-        "grails-app/services/**",
-        "grails-app/taglib/**",
-        "grails-app/utils/**",
-        "grails-app/views/**",
-        "grails-app/views/error.gsp"
-    ]
+import grails.plugin.urlWithoutSchemeValidator.constraints.UrlWithoutSchemeConstraint
+import org.codehaus.groovy.grails.validation.ConstrainedProperty
 
-    def title = "Url Without Scheme Validator Plugin" // Headline display name of the plugin
-    def author = "Marcin Swierczynski"
-    def authorEmail = "marcin@swierczynski.net"
-    def description = '''\
+class UrlWithoutSchemeValidatorGrailsPlugin {
+	// the plugin version
+	def version = "0.1"
+	// the version or versions of Grails the plugin is designed for
+	def grailsVersion = "2.0 > *"
+	// resources that are excluded from plugin packaging
+	def pluginExcludes = [
+			"grails-app/controllers/**",
+			"grails-app/domain/**",
+			"grails-app/services/**",
+			"grails-app/taglib/**",
+			"grails-app/utils/**",
+			"grails-app/views/**",
+			"grails-app/views/error.gsp"
+	]
+
+	def title = "Url Without Scheme Validator Plugin" // Headline display name of the plugin
+	def author = "Marcin Swierczynski"
+	def authorEmail = "marcin@swierczynski.net"
+	def description = '''\
 The Url Without Scheme Validator Plugin allows to use custom validator that validates the URLs\
 but - different than standard validator - does not care if the scheme is provided or not.\
 Moreover, it can be used like "first-class", built-in validator.
 '''
 
-    // URL to the plugin's documentation
-    def documentation = "http://grails.org/plugin/url-without-scheme-validator"
+	// URL to the plugin's documentation
+	def documentation = "http://grails.org/plugin/url-without-scheme-validator"
 
-    // Extra (optional) plugin metadata
+	// Extra (optional) plugin metadata
 
-    // License: one of 'APACHE', 'GPL2', 'GPL3'
-    def license = "APACHE"
+	// License: one of 'APACHE', 'GPL2', 'GPL3'
+	def license = "APACHE"
 
-    // Details of company behind the plugin (if there is one)
-    def organization = [ name: "UWS Software Service", url: "http://uws-software-service.com" ]
+	// Details of company behind the plugin (if there is one)
+	def organization = [name: "UWS Software Service", url: "http://uws-software-service.com"]
 
-    // Any additional developers beyond the author specified above.
+	// Any additional developers beyond the author specified above.
 //    def developers = [ [ name: "Joe Bloggs", email: "joe@bloggs.net" ]]
 
-    // Location of the plugin's issue tracker.
+	// Location of the plugin's issue tracker.
 //    def issueManagement = [ system: "JIRA", url: "http://jira.grails.org/browse/GPMYPLUGIN" ]
 
-    // Online location of the plugin's browseable source code.
-    def scm = [ url: "https://github.com/MarcinOS/url-without-scheme-validator-plugin" ]
+	// Online location of the plugin's browseable source code.
+	def scm = [url: "https://github.com/MarcinOS/url-without-scheme-validator-plugin"]
 
-    def doWithWebDescriptor = { xml ->
-        // TODO Implement additions to web.xml (optional), this event occurs before
-    }
+	def doWithWebDescriptor = { xml ->
+		// TODO Implement additions to web.xml (optional), this event occurs before
+	}
 
-    def doWithSpring = {
-        // TODO Implement runtime spring config (optional)
-    }
+	def doWithSpring = {
+		ConstrainedProperty.registerNewConstraint(UrlWithoutSchemeConstraint.CONSTRAINT_NAME, UrlWithoutSchemeConstraint.class)
+	}
 
-    def doWithDynamicMethods = { ctx ->
-        // TODO Implement registering dynamic methods to classes (optional)
-    }
+	def doWithDynamicMethods = { ctx ->
+		// TODO Implement registering dynamic methods to classes (optional)
+	}
 
-    def doWithApplicationContext = { ctx ->
-        // TODO Implement post initialization spring config (optional)
-    }
+	def doWithApplicationContext = { ctx ->
+		// TODO Implement post initialization spring config (optional)
+	}
 
-    def onChange = { event ->
-        // TODO Implement code that is executed when any artefact that this plugin is
-        // watching is modified and reloaded. The event contains: event.source,
-        // event.application, event.manager, event.ctx, and event.plugin.
-    }
+	def onChange = { event ->
+		// TODO Implement code that is executed when any artefact that this plugin is
+		// watching is modified and reloaded. The event contains: event.source,
+		// event.application, event.manager, event.ctx, and event.plugin.
+	}
 
-    def onConfigChange = { event ->
-        // TODO Implement code that is executed when the project configuration changes.
-        // The event is the same as for 'onChange'.
-    }
+	def onConfigChange = { event ->
+		// TODO Implement code that is executed when the project configuration changes.
+		// The event is the same as for 'onChange'.
+	}
 
-    def onShutdown = { event ->
-        // TODO Implement code that is executed when the application shuts down (optional)
-    }
+	def onShutdown = { event ->
+		// TODO Implement code that is executed when the application shuts down (optional)
+	}
 }
