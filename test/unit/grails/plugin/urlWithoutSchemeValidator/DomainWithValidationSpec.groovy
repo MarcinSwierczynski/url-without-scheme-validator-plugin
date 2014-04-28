@@ -49,4 +49,14 @@ class DomainWithValidationSpec extends Specification {
 		domain.ftpUrl == 'ftp://www.google.com'
 	}
 
+	void "should leave url scheme if already there"() {
+		given:
+		DomainWithValidation domain = new DomainWithValidation(url: 'http://www.google.com')
+
+		expect:
+		domain.url == 'http://www.google.com'
+		domain.httpUrl == 'http://www.google.com'
+		domain.ftpUrl == 'http://www.google.com'
+	}
+
 }
