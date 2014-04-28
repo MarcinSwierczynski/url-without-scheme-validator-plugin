@@ -31,4 +31,22 @@ class DomainWithValidationSpec extends Specification {
 		domain.validate()
 	}
 
+	void "should get HTTP url"() {
+		given:
+		DomainWithValidation domain = new DomainWithValidation(url: 'www.google.com')
+
+		expect:
+		domain.url == 'www.google.com'
+		domain.httpUrl == 'http://www.google.com'
+	}
+
+	void "should get FTP url"() {
+		given:
+		DomainWithValidation domain = new DomainWithValidation(url: 'www.google.com')
+
+		expect:
+		domain.url == 'www.google.com'
+		domain.ftpUrl == 'ftp://www.google.com'
+	}
+
 }
