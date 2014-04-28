@@ -2,14 +2,15 @@ package grails.plugin.urlWithoutSchemeValidator.utils
 
 import spock.lang.Specification
 
+import static grails.plugin.urlWithoutSchemeValidator.utils.UrlScheme.COLON
+import static grails.plugin.urlWithoutSchemeValidator.utils.UrlScheme.FTP
+
 /**
  * Date: 20.04.2014 at 15:37
  *
  * @author Marcin Świerczyński
  */
 class UrlValidatorUtilsSpec extends Specification {
-
-	private static final String COLON = '://'
 
 	void "should consider url starting with known schemes valid"() {
 		expect:
@@ -40,6 +41,37 @@ class UrlValidatorUtilsSpec extends Specification {
 	void "should consider null invalid"() {
 		expect:
 		!UrlValidatorUtils.isValid(null)
+	}
+
+	void "should return url with scheme as it is"() {
+		expect:
+		UrlValidatorUtils.prefixSchemeIfNecessary(scheme + COLON + 'www.google.com') == scheme + COLON + 'www.google.com'
+
+		where:
+		scheme  | _
+		'http'  | _
+		'https' | _
+		'ftp'   | _
+	}
+
+	void "should add default scheme to url without scheme"() {
+		expect:
+		UrlValidatorUtils.prefixSchemeIfNecessary('www.google.com') == 'http://www.google.com'
+	}
+
+	void "should add provided scheme to url without scheme"() {
+		expect:
+		UrlValidatorUtils.prefixSchemeIfNecessary('www.google.com', FTP) == 'ftp://www.google.com'
+	}
+
+	void "should add default scheme to any string"() {
+		expect:
+		UrlValidatorUtils.prefixSchemeIfNecessary('www.google') == 'http://www.google'
+	}
+
+	void "should return null on null input"() {
+		expect:
+		UrlValidatorUtils.prefixSchemeIfNecessary(null) == null
 	}
 
 }

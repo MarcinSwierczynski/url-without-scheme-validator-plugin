@@ -2,6 +2,8 @@ package grails.plugin.urlWithoutSchemeValidator.utils
 
 import org.codehaus.groovy.grails.validation.routines.UrlValidator
 
+import static grails.plugin.urlWithoutSchemeValidator.utils.UrlScheme.*
+
 /**
  * Date: 20.04.2014 at 15:36
  *
@@ -9,26 +11,21 @@ import org.codehaus.groovy.grails.validation.routines.UrlValidator
  */
 class UrlValidatorUtils {
 
-	private static final String HTTP_SCHEME = "http"
-	private static final String COLON = '://'
-	private static final String[] DEFAULT_SCHEMES = [HTTP_SCHEME, "https", "ftp"];
-
-	public static boolean isValid(String url) {
-		String urlToCheck = url
-
-		if (!startsWithKnownSchemes(urlToCheck)) {
-			urlToCheck = suffixColon(HTTP_SCHEME) + urlToCheck
-		}
-
+	public static boolean isValid(final String url) {
+		String urlToCheck = prefixSchemeIfNecessary(url)
 		new UrlValidator().isValid(urlToCheck)
 	}
 
-	private static boolean startsWithKnownSchemes(String url) {
-		DEFAULT_SCHEMES.any { url?.startsWith(suffixColon(it)) }
+	public static String prefixSchemeIfNecessary(final String url, final UrlScheme scheme = HTTP) {
+		String urlToCheck = url
+		if (urlToCheck && !startsWithKnownSchemes(urlToCheck)) {
+			urlToCheck = scheme.addSuffixColon() + urlToCheck
+		}
+		urlToCheck
 	}
 
-	private static String suffixColon(String scheme) {
-		scheme + COLON
+	private static boolean startsWithKnownSchemes(final String url) {
+		UrlScheme.values().any { url.startsWith(it.addSuffixColon()) }
 	}
 
 }
