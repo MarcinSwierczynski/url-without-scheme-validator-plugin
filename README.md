@@ -60,7 +60,7 @@ The default scheme is `UrlScheme.HTTP`, but `UrlScheme.HTTPS` and `UrlScheme.FTP
 
 The example usage could look like:
 
-	class DomainWithValidation {
+	class Domain {
 
 		static transients = ['httpUrl', 'ftpUrl']
 
