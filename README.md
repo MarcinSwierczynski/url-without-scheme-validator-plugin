@@ -45,3 +45,37 @@ Example:
 		}
 	
 	}
+
+### Retrieving valid URL (with scheme)
+
+The validator allows users to save URLs without scheme, which is perfect for displaying. However, the URL without scheme is not usable in, for example, HTML A tag:
+
+	<a href="www.google.com">Google</a> // not a proper URL
+
+That's why the plugin contains the util method that prefix the given URL with scheme, but only if it is necessary. Otherwise, it returns the input as it is. The method has the following signature:
+
+	String prefixSchemeIfNecessary(final String url, final UrlScheme scheme = HTTP)
+
+The default scheme is `UrlScheme.HTTP`, but `UrlScheme.HTTPS` and `UrlScheme.FTP` are also available.
+
+The example usage could look like:
+
+	class DomainWithValidation {
+
+		static transients = ['httpUrl', 'ftpUrl']
+
+		String url
+
+		static constraints = {
+		    url nullable: true, urlWithoutScheme: true
+		}
+
+		String getHttpUrl() {
+			UrlValidatorUtils.prefixSchemeIfNecessary(url) // prefixes url with http scheme, if no scheme is provided
+		}
+
+		String getFtpUrl() {
+			UrlValidatorUtils.prefixSchemeIfNecessary(url, UrlScheme.FTP) // prefixes url with ftp scheme, if no scheme is provided
+		}
+
+	}
