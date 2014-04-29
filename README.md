@@ -36,6 +36,8 @@ So to make sure the URL is valid, no matter if user put the scheme or not, just 
 
 Example:
 
+	package com.example
+
 	class Domain {
 	
 		String url
@@ -60,6 +62,8 @@ The default scheme is `UrlScheme.HTTP`, but `UrlScheme.HTTPS` and `UrlScheme.FTP
 
 The example usage could look like:
 
+	package com.example
+
 	class Domain {
 
 		static transients = ['httpUrl', 'ftpUrl']
@@ -79,3 +83,21 @@ The example usage could look like:
 		}
 
 	}
+
+### Internationalization (i18n)
+
+The default error message for the validator is 
+
+	default.url.without.schema.not.valid.message=Property [{0}] of class [{1}] with value [{2}] is not a valid URL
+
+It's also possible to configure it on a field level, by creating an entry in `messages.properties` with suffix: 
+
+	not.urlWithoutScheme
+
+So the message.properties entry for the class above could look like:
+
+	com.example.Domain.url.not.urlWithoutScheme={2} is not a valid URL
+
+And result in error message saying for example:
+
+	www.google is not a valid URL
