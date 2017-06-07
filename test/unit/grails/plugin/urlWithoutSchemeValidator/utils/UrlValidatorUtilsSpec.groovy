@@ -33,9 +33,33 @@ class UrlValidatorUtilsSpec extends Specification {
 		UrlValidatorUtils.isValid('www.google.com')
 	}
 
+	void "should consider url with new tld valid"() {
+		expect:
+		UrlValidatorUtils.isValid(url)
+
+		where:
+		url                  | _
+		'http://dot.academy' | _
+		'http://dot.abc'     | _
+		'http://dot.beer'    | _
+		'http://dot.glass'   | _
+		'http://dot.pizza'   | _
+		'http://dot.swiss'   | _
+		'http://dot.vodka'   | _
+		'http://dot.wtf'     | _
+		'http://dot.xyz'     | _
+
+	}
+
 	void "should consider invalid url with scheme invalid"() {
 		expect:
-		!UrlValidatorUtils.isValid('http://www.google')
+		!UrlValidatorUtils.isValid(url)
+
+		where:
+		url                         | _
+		'http://dot.notexistingtld' | _
+		'http://dot.ccom'           | _
+
 	}
 
 	void "should consider null invalid"() {

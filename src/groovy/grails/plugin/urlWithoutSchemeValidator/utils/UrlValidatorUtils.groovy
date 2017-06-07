@@ -1,6 +1,6 @@
 package grails.plugin.urlWithoutSchemeValidator.utils
 
-import org.codehaus.groovy.grails.validation.routines.UrlValidator
+import org.apache.commons.validator.routines.UrlValidator
 
 import static grails.plugin.urlWithoutSchemeValidator.utils.UrlScheme.*
 
