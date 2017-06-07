@@ -37,6 +37,15 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
         // runtime 'mysql:mysql-connector-java:5.1.27'
+
+        //update commons-validator version which supports new TLD's (.swiss, ...)
+        compile( "commons-validator:commons-validator:1.6" ) {
+            exclude group: 'xml-apis', module:'xml-apis'
+            exclude group: 'commons-digester', module:'commons-digester'
+            exclude group: 'commons-logging', module:'commons-logging'
+            exclude group: 'commons-beanutils', module:'commons-beanutils'
+            exclude group: 'commons-collections', module:'commons-collections'
+        }
     }
 
     plugins {

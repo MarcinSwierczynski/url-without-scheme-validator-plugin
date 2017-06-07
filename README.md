@@ -9,7 +9,7 @@ Add the following to your _grails-app/conf/BuildConfig.groovy_
 	…
 	plugins {
 	…
-		 compile ':url-without-scheme-validator:0.2'
+		 compile ':url-without-scheme-validator:0.3'
 	…
 	}
 
@@ -99,5 +99,7 @@ So the message.properties entry for the class above could look like:
 	com.example.Domain.url.not.urlWithoutScheme={2} is not a valid URL
 
 And result in error message saying for example:
+<pre>
+     <s>www.google</s>www.invalidtld is not a valid URL (.google is valid since version 0.3 (like .beer, .vodka and .pizza)
+<pre>
 
-	www.google is not a valid URL

@@ -16,7 +16,7 @@ class DomainWithValidationSpec extends Specification {
 
 	void "should consider invalid domain invalid"() {
 		given:
-		DomainWithValidation domain = new DomainWithValidation(url: 'www.google')
+		DomainWithValidation domain = new DomainWithValidation(url: 'www.google.notexistingtld')
 
 		expect:
 		!domain.validate()
@@ -57,6 +57,14 @@ class DomainWithValidationSpec extends Specification {
 		domain.url == 'http://www.google.com'
 		domain.httpUrl == 'http://www.google.com'
 		domain.ftpUrl == 'http://www.google.com'
+	}
+
+	void "should validate .swiss domain as valid"() {
+		given:
+		DomainWithValidation domain = new DomainWithValidation(url: 'http://dot.swiss')
+
+		expect:
+		domain.validate()
 	}
 
 }
